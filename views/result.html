@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+
+        <title> <%=title%> </title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"> 
+
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> 
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-inner navbar-left">
+                    <a class="navbar-brand" ><%=title%></a>
+                </div>
+                <div class="navbar-inner pull-right">
+                    <form method="post" enctype="multipart/form-data">
+                        <input id="file_dir" type="text" class="text-info" readonly
+                            style="text-align: center; color: gray; border:1px solid gray; width: 250px; font-style: italic;" value="<%=fileName%>">
+                        <label class="btn btn-default navbar-btn">
+                            Выбрать файл <input type="file" id="fileInput" name='data' style="display: none;">
+                        </label>
+                        <label class="btn btn-default navbar-btn ">
+                            Загрузить <input type="submit" id="submit_bttn" style="display: none;" disabled>
+                        </label>
+                    </form> 
+                </div>
+            </div>
+            
+            <table width="100%">
+                <tr>
+                    <td width="20%" style="vertical-align: top;">
+                        <ul class="nav nav-pills nav-stacked" role="tablist">
+                            <li><a class="tabnav" href="javascript:void(0)" data-toggle="tab" onclick="openTab(event, 'Data')" id="defaultOpen">
+                                Исходные даные
+                            </a></li>
+                            <li><a class="tabnav" data-toggle="tab" href="javascript:void(0)" onclick="openTab(event, 'Inflation')">
+                                Инфляция
+                            </a></li>
+                            <li><a class="tabnav" data-toggle="tab" href="javascript:void(0)" onclick="openTab(event, 'TrendInfluence')">
+                                Влияние тренда
+                            </a></li>
+                            <li><a class="tabnav" data-toggle="tab" href="javascript:void(0)" onclick="openTab(event, 'CostInfluence')">
+                                Влияние цены
+                            </a></li>
+                            <li><a class="tabnav" data-toggle="tab" href="javascript:void(0)" onclick="openTab(event, 'Regression')">
+                                Множественная регресия
+                            </a></li>
+                        </ul>
+                    </td>
+                    <td width="80%" style="vertical-align: top;">
+                        <div id="Data" class="tabcontent" align="center" width="100%">
+                            
+                            <div id="chart_data" width="100%" style=" height: 400px; margin: 0 auto; margin-bottom: 10px">
+                            </div>
+
+                            <div class="table-responsive" >
+                                <table class="table table-bordered table-hover">
+                                        <%-generalData%>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div id="Inflation" class="tabcontent" align="center" width="100%">
+
+                            <div id="chart_inflation" style="width: 100%, height: 400px; margin: 0 auto; margin-bottom: 10px">
+                                
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                        <%-inflationData%>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div id="TrendInfluence" class="tabcontent" align="center" width="100%">
+                            <div id="chart_trendInfluence" style="min-width: 310px; height: 400px; margin: 0 auto; margin-bottom: 10px">
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                        <%-trenInfluenceData%>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div id="CostInfluence" class="tabcontent" align="center" width="100%">
+                            <div id="chart_costInfluence" style="min-width: 310px; height: 400px; margin: 0 auto; margin-bottom: 10px">
+                                some plot
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                        <%-costInfluenceData%>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div id="Regression" class="tabcontent" align="center" width="100%">
+                            <div id="chart_regression" style="min-width: 310px; height: 400px; margin: 0 auto; margin-bottom: 10px">
+                                some plot
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                        <%-multipleRegressionData%>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <script>
+            
+
+            $(document).ready(function () {
+                var fileInput = document.getElementById('fileInput');
+                fileInput.addEventListener('change', function (e) {
+                    document.getElementById('file_dir').value = fileInput.files[0].name;
+                    document.getElementById('submit_bttn').disabled = false;
+                });
+                 
+                 
+            });
+
+            //open default tab with downloaded data
+            document.getElementById("defaultOpen").click();
+
+            function openTab(evt, tabName) {
+                // Declare all variables
+                var i, tabcontent, tablinks;
+
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                // Get all elements with class="tablinks" and remove the class "active"
+                tablinks = document.getElementsByClassName("tabnav");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+
+                // Show the current tab, and add an "active" class to the link that opened the tab
+                document.getElementById(tabName).style.display = "block";
+                switch (tabName) {
+                    case 'Data' : {
+                        <%-generalChart%>
+                    } break;
+                    case 'Inflation' : {
+                        <%-inflationChart%>
+                    } break;
+                    case 'TrendInfluence' : {
+                        <%-trendInfluenceChart%>
+                    } break;
+                    case 'CostInfluence' : {
+                        <%-costInfuenceChart%>
+                    } break;
+                    case 'Regression' : {
+                        <%-multipleRegressionChart%>
+                    } break;
+                }
+                evt.currentTarget.className += " active";
+            }
+        </script>
+
+    </body>
+</html>
+
+        

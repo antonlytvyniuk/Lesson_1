@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title> <%=title%> </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"> 
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    </head>
+    <body>
+        <style>
+            .outer:before {
+                content: '';
+                display: inline-block;
+                height: 100%;
+                vertical-align: middle;
+            }
+
+            .inner {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .outer {
+                text-align: center;
+            }
+        </style>
+        <div class="container">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-inner">
+                    <a class="navbar-brand " ><%=title%></a>
+                </div>
+            </div>
+
+            <div class="outer" style="height: 70vh; width: 100%;">
+                <form class="inner" method="post" enctype="multipart/form-data">
+                    <input id="file_dir" type="text" class="text-info" readonly
+                        style="text-align: center; color: gray; border:1px solid gray; width: 250px; font-style: italic" value="Выбраный файл">
+                    <label class="btn btn-default btn-file">
+                        Выбрать файл <input type="file" id="fileInput" name='data' style="display: none;">
+                    </label>
+                    <label class="btn btn-default btn-file">
+                        Загрузить <input type="submit" id="submit_bttn" style="display: none;" disabled>
+                    </label>
+                </form> 
+            </div>
+        </div>
+        
+        <script>
+            $(document).ready(function () {
+                var fileInput = document.getElementById('fileInput');
+                fileInput.addEventListener('change', function (e) {
+                    document.getElementById('file_dir').value = fileInput.files[0].name;
+                    document.getElementById('submit_bttn').disabled = false;
+                });
+            });
+        </script>
+    </body>
+</html>
+
+        
