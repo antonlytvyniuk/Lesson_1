@@ -42,28 +42,28 @@ var Lesson_1 = function(dataString) {
     /** Влияние тренда @private */
     this.trendInfluence = []; 
 
-    /** Линейная регресия @private */
+    /** Линейная регрессия @private */
     this.linearRegression = [];
 
-    /** Експоненциальная регресия @private */
+    /** Експоненциальная регрессия @private */
     this.expRegression = [];
 
-    /** Логарифмическая регресия @private */
+    /** Логарифмическая регрессия @private */
     this.logRegression = [];
 
-    /** Лучшая регресия @private */
+    /** Лучшая регрессия @private */
     this.bestRegression = []; 
 
     /** Влияние цены @private */
     this.costInfluence = []; 
 
-    /** Множественная регресия по тренду, средним продажам и сезонности @private */
+    /** Множественная регрессия по тренду, средним продажам и сезонности @private */
     this.multipleRegressionTrend = [];
 
-    /** Множественная регресия по влиянию цены, средним продажам и сезонности @private */
+    /** Множественная регрессия по влиянию цены, средним продажам и сезонности @private */
     this.multipleRegressionCost = [];
 
-    /** Лучшая множественная регресия @private */
+    /** Лучшая множественная регрессия @private */
     this.bestMultipleRegression = [];
 
     var dataRows = dataString.split('\n');
@@ -81,12 +81,12 @@ var Lesson_1 = function(dataString) {
     }
 
     /**
-     * Поиск параметров регресии и востановление ряда по регресии
+     * Поиск параметров регрессии и востановление ряда по регрессии
      *
      * @private
      * @param {number[]} y - искомый ряд.
-     * @param {number[]} x - регресор.
-     * @param {string} type - тип регресии.
+     * @param {number[]} x - регрессор.
+     * @param {string} type - тип регрессии.
      * @param {boolean} dependence - прямая или обратная зависимость (true\false).
      * @return {number[]}
      */
@@ -128,12 +128,12 @@ var Lesson_1 = function(dataString) {
     }
 
     /**
-     * Проверка на правильность выполнение зависимости между у и х в регресии
+     * Проверка на правильность выполнение зависимости между у и х в регрессии
      *
      * @private
-     * @param {number} a - первый коефициент регресии.
-     * @param {number} b - второй коефициент регресии.
-     * @param {string} type - тип регресии.
+     * @param {number} a - первый коефициент регрессии.
+     * @param {number} b - второй коефициент регрессии.
+     * @param {string} type - тип регрессии.
      * @param {boolean} dependence - прямая или обратная зависимость (true\false).
      * @return {boolean}
      */
@@ -147,13 +147,13 @@ var Lesson_1 = function(dataString) {
     }
 
     /**
-     * Подсчет результата регресии по заданым коефициентам и заданому значению регресора
+     * Подсчет результата регрессии по заданым коефициентам и заданому значению регрессора
      *
      * @private
-     * @param {number} a - первый коефициент регресии.
-     * @param {number} b - второй коефициент регресии.
-     * @param {number} x - значение регресора.
-     * @param {string} type - тип регресии.
+     * @param {number} a - первый коефициент регрессии.
+     * @param {number} b - второй коефициент регрессии.
+     * @param {number} x - значение регрессора.
+     * @param {string} type - тип регрессии.
      * @return {number}
      */
     this.calculateRegressionResult = function (a, b, x, type) {
@@ -283,11 +283,11 @@ var Lesson_1 = function(dataString) {
     }
 
     /**
-     * Поиск параметров регресии и востановление ряда по регресии
+     * Поиск параметров регрессии и востановление ряда по регрессии
      *
      * @private
      * @param {number[]} y - искомый ряд.
-     * @param {number[][]} x - масив значений регресоров.
+     * @param {number[][]} x - масив значений регрессоров.
      * @param {boolean[]} dependences - масив описывающий зависимости к каждому из х (true \ false).
      * @return {number[]}
      */
@@ -337,10 +337,10 @@ var Lesson_1 = function(dataString) {
     }
 
     /**
-     * Проверка на правильность выполнение зависимости между у и каждым с х в регресии
+     * Проверка на правильность выполнение зависимости между у и каждым с х в регрессии
      *
      * @private
-     * @param {number[]} coeficients - коефициенты регресии.
+     * @param {number[]} coeficients - коефициенты регрессии.
      * @param {boolean[]} dependences - масив описывающий зависимости к каждому из х (true \ false).
      * @return {boolean}
      */
@@ -359,7 +359,7 @@ var Lesson_1 = function(dataString) {
 
     /**
      * Заполняет свойства такие как: инфляция, скользящее среднее, сезонность, продажи очищенные от сезонности
-     * тренд, влияние тренда, среднее значение продаж, все регресии, выбирает лучшие регресии, вличние цены...
+     * тренд, влияние тренда, среднее значение продаж, все регрессии, выбирает лучшие регрессии, вличние цены...
      *
      * @public
      */
@@ -446,7 +446,7 @@ var Lesson_1 = function(dataString) {
                         '<th align="center">Средняя цена</th>' +
                         '<th align="center">Влияние тренда</th>' +
                         '<th align="center">Влияние цены</th>' +
-                        '<th align="center" width="20%">Множественная регресия (' + 
+                        '<th align="center" width="20%">Множественная регрессия (' + 
             ( (this.bestMultipleRegression === this.multipleRegressionTrend) ? 'тренд': 'влияние цены' ) +
             ', среднее значение продаж, сезонность)</th>' + 
                     '</tr>';
@@ -546,7 +546,7 @@ var Lesson_1 = function(dataString) {
                         '<th align="center">Неделя (ISO)</th>' +
                         '<th align="center">Продажи (шт.)</th>' +
                         '<th align="center">Средняя цена</th>' +
-                        '<th align="center">Лучшая регресия (' +
+                        '<th align="center">Лучшая регрессия (' +
         ((this.bestRegression === this.linearRegression) ? 'линейная' : 
         (this.bestRegression === this.expRegression) ? 'експоненциальная' : 'логарифмическая' ) +
                         ')</th>' +
@@ -582,8 +582,8 @@ var Lesson_1 = function(dataString) {
                         '<th align="center">№</th>' + 
                         '<th align="center">Неделя (ISO)</th>' +
                         '<th align="center">Продажи (шт.)</th>' +
-                        '<th align="center">Множественная регресия (тренд, среднее значение продаж, сезонность)</th>' +
-                        '<th align="center">Множественная регресия (влияние цены, среднее значение продаж, сезонность)</th>' + 
+                        '<th align="center">Множественная регрессия (тренд, среднее значение продаж, сезонность)</th>' +
+                        '<th align="center">Множественная регрессия (влияние цены, среднее значение продаж, сезонность)</th>' + 
                     '</tr>';
 
         for (var i = 0; i < this.numberOfSales.length; ++i) {
@@ -641,7 +641,7 @@ var Lesson_1 = function(dataString) {
         }
         chart += this.countOfSales[this.countOfSales.length - 1] + ']}, {';
 
-        chart += 'name: "Множественная регресия (' + 
+        chart += 'name: "Множественная регрессия (' + 
             ( (this.bestMultipleRegression === this.multipleRegressionTrend) ? 'тренд': 'влияние цены' ) +
             ', среднее значение продаж, сезонность)", ';
         chart += 'data: [';
@@ -846,7 +846,7 @@ var Lesson_1 = function(dataString) {
     this.generateChartMultipleRegression = function () {
         var chart = 'Highcharts.chart("chart_regression", {' +
                     'title: {' +
-                            'text: "Можественная регресия",' +
+                            'text: "Множественная регрессия",' +
                             'x: -20' +
                         '},' +
                         'xAxis: {' +
@@ -879,14 +879,14 @@ var Lesson_1 = function(dataString) {
         }
         chart += this.countOfSales[this.countOfSales.length - 1] + ']}, {';
 
-        chart += 'name: "Множественная регресия (тренд, среднее количество продаж, сезонность)", ';
+        chart += 'name: "Множественная регрессия (тренд, среднее количество продаж, сезонность)", ';
         chart += 'data: [';
         for (var i = 0; i < this.multipleRegressionTrend.length - 1; ++i) {
             chart += this.multipleRegressionTrend[i] + ', ';
         }
         chart += this.multipleRegressionTrend[this.multipleRegressionTrend.length - 1] + ']}, {';
 
-        chart += 'name: "Множественная регресия (влияние цены, среднее количество продаж, сезонность)", ';
+        chart += 'name: "Множественная регрессия (влияние цены, среднее количество продаж, сезонность)", ';
         chart += 'data: [';
         for (var i = 0; i < this.multipleRegressionCost.length - 1; ++i) {
             chart += this.multipleRegressionCost[i] + ', ';
