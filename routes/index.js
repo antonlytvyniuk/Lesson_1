@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', upload.single('data'), function(req, res, next) {
 
-  var calculations = new lesson_1(fs.readFileSync(req.file.path, 'UTF-8').toString());
+  var calculations = new lesson_1(fs.readFileSync(req.file.path).toString());
   calculations.calculatesResults();
 
   res.render('result', {title: 'Урок №1', 
